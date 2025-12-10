@@ -289,14 +289,13 @@ Our system creates a **unique trace ID** for each transaction that flows through
 
 
 1. Go to **Azure Portal → Application Insights → [Your Resource]**
-2. Navigate to **Investigate → Transaction Search** 
+2. Navigate to **Investigate → Search** 
 3. Click on **See all data in the last 24h**
 4. On the top of your page, select your **Event types = Trace**
 
 In our use case, for each transaction processed (unique trace ID), we will have 42 traces. In the example below, for a run of 10 transactions, I can see 420 traces.
-
+You might need to switch to the individual items view as shown below : 
 ![alt text](images/tracing1.png)
-
 
 5. Click on the first Trace option that appears on the list. It should be named: **workflow.completed**
 

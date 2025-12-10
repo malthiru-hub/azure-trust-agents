@@ -525,6 +525,8 @@ async def compliance_report_executor(
                 audit_conclusion=audit_report["executive_summary"]["audit_conclusion"],
                 compliance_rating=audit_report["compliance_status"]["compliance_rating"],
                 risk_factors_identified=audit_report["detailed_findings"]["risk_factors_identified"],
+                risk_score=float(audit_report["executive_summary"]["risk_score"]) if isinstance(
+                    audit_report["executive_summary"]["risk_score"], (int, float)) else 0.0,
                 compliance_concerns=audit_report["detailed_findings"]["compliance_concerns"],
                 recommendations=audit_report["detailed_findings"]["recommendations"],
                 requires_immediate_action=audit_report["compliance_status"]["requires_immediate_action"],
@@ -587,6 +589,8 @@ Focus on translating the risk analysis into clear audit findings and actionable 
                         audit_report_id=local_audit["audit_report_id"],
                         audit_conclusion=f"{local_audit['executive_summary']['audit_conclusion']} (AI Enhanced: {result_text[:200]}...)",
                         compliance_rating=local_audit["compliance_status"]["compliance_rating"],
+                        risk_score=float(local_audit["executive_summary"]["risk_score"]) if isinstance(
+                            local_audit["executive_summary"]["risk_score"], (int, float)) else 0.0,
                         risk_factors_identified=local_audit["detailed_findings"]["risk_factors_identified"],
                         compliance_concerns=local_audit["detailed_findings"]["compliance_concerns"],
                         recommendations=local_audit["detailed_findings"]["recommendations"],
@@ -650,8 +654,6 @@ async def fraud_alert_executor(
         )
         mcp_tool.update_headers(
             "Ocp-Apim-Subscription-Key", mcp_subscription_key)
-
-            
 
         with project_client:
             agents_client = project_client.agents
